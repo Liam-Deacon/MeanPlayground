@@ -6,6 +6,7 @@ import {registerEvents} from './list.events';
 var ListSchema = new mongoose.Schema({
   name: String,
   comment: String,
+  userID: String,
   items: Array,
   active: Boolean,
   groups: Array,

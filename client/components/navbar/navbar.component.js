@@ -6,10 +6,14 @@ import angular from 'angular';
 export class NavbarComponent {
   menu = [{
     title: 'Home',
-    state: 'main'
+    state: 'main',
+    icon: 'fa fa-home',
+    hidden: true
   }, {
     title: 'Groups',
-    state: 'groups'
+    state: 'groups',
+    icon: 'fa fa-users',
+    hidden: false
   }];
   isLoggedIn: Function;
   isAdmin: Function;

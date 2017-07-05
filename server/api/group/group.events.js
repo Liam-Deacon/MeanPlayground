@@ -26,8 +26,8 @@ function registerEvents(Group) {
 
 function emitEvent(event) {
   return function(doc) {
-    ThingEvents.emit(`${event}:${doc._id}`, doc);
-    ThingEvents.emit(event, doc);
+    GroupEvents.emit(`${event}:${doc._id}`, doc);
+    GroupEvents.emit(event, doc);
   };
 }
 

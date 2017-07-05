@@ -5,9 +5,9 @@
 var app = require('../..');
 import request from 'supertest';
 
-var newThing;
+var newGroup;
 
-describe('Thing API:', function() {
+describe('Group API:', function() {
   describe('GET /api/groups', function() {
     var groups;
 
@@ -35,7 +35,7 @@ describe('Thing API:', function() {
       request(app)
         .post('/api/groups')
         .send({
-          name: 'New Thing',
+          name: 'New Group',
           info: 'This is the brand new group!!!'
         })
         .expect(201)
@@ -44,14 +44,14 @@ describe('Thing API:', function() {
           if(err) {
             return done(err);
           }
-          newThing = res.body;
+          newGroup = res.body;
           done();
         });
     });
 
     it('should respond with the newly created group', function() {
-      expect(newThing.name).to.equal('New Thing');
-      expect(newThing.info).to.equal('This is the brand new group!!!');
+      expect(newGroup.name).to.equal('New Group');
+      expect(newGroup.info).to.equal('This is the brand new group!!!');
     });
   });
 
@@ -60,7 +60,7 @@ describe('Thing API:', function() {
 
     beforeEach(function(done) {
       request(app)
-        .get(`/api/groups/${newThing._id}`)
+        .get(`/api/groups/${newGroup._id}`)
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
@@ -77,19 +77,19 @@ describe('Thing API:', function() {
     });
 
     it('should respond with the requested group', function() {
-      expect(group.name).to.equal('New Thing');
+      expect(group.name).to.equal('New Group');
       expect(group.info).to.equal('This is the brand new group!!!');
     });
   });
 
   describe('PUT /api/groups/:id', function() {
-    var updatedThing;
+    var updatedGroup;
 
     beforeEach(function(done) {
       request(app)
-        .put(`/api/groups/${newThing._id}`)
+        .put(`/api/groups/${newGroup._id}`)
         .send({
-          name: 'Updated Thing',
+          name: 'Updated Group',
           info: 'This is the updated group!!!'
         })
         .expect(200)
@@ -98,23 +98,23 @@ describe('Thing API:', function() {
           if(err) {
             return done(err);
           }
-          updatedThing = res.body;
+          updatedGroup = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      updatedThing = {};
+      updatedGroup = {};
     });
 
     it('should respond with the updated group', function() {
-      expect(updatedThing.name).to.equal('Updated Thing');
-      expect(updatedThing.info).to.equal('This is the updated group!!!');
+      expect(updatedGroup.name).to.equal('Updated Group');
+      expect(updatedGroup.info).to.equal('This is the updated group!!!');
     });
 
     it('should respond with the updated group on a subsequent GET', function(done) {
       request(app)
-        .get(`/api/groups/${newThing._id}`)
+        .get(`/api/groups/${newGroup._id}`)
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
@@ -123,7 +123,7 @@ describe('Thing API:', function() {
           }
           let group = res.body;
 
-          expect(group.name).to.equal('Updated Thing');
+          expect(group.name).to.equal('Updated Group');
           expect(group.info).to.equal('This is the updated group!!!');
 
           done();
@@ -132,13 +132,13 @@ describe('Thing API:', function() {
   });
 
   describe('PATCH /api/groups/:id', function() {
-    var patchedThing;
+    var patchedGroup;
 
     beforeEach(function(done) {
       request(app)
-        .patch(`/api/groups/${newThing._id}`)
+        .patch(`/api/groups/${newGroup._id}`)
         .send([
-          { op: 'replace', path: '/name', value: 'Patched Thing' },
+          { op: 'replace', path: '/name', value: 'Patched Group' },
           { op: 'replace', path: '/info', value: 'This is the patched group!!!' }
         ])
         .expect(200)
@@ -147,25 +147,25 @@ describe('Thing API:', function() {
           if(err) {
             return done(err);
           }
-          patchedThing = res.body;
+          patchedGroup = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      patchedThing = {};
+      patchedGroup = {};
     });
 
     it('should respond with the patched group', function() {
-      expect(patchedThing.name).to.equal('Patched Thing');
-      expect(patchedThing.info).to.equal('This is the patched group!!!');
+      expect(patchedGroup.name).to.equal('Patched Group');
+      expect(patchedGroup.info).to.equal('This is the patched group!!!');
     });
   });
 
   describe('DELETE /api/groups/:id', function() {
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete(`/api/groups/${newThing._id}`)
+        .delete(`/api/groups/${newGroup._id}`)
         .expect(204)
         .end(err => {
           if(err) {
@@ -177,7 +177,7 @@ describe('Thing API:', function() {
 
     it('should respond with 404 when group does not exist', function(done) {
       request(app)
-        .delete(`/api/groups/${newThing._id}`)
+        .delete(`/api/groups/${newGroup._id}`)
         .expect(404)
         .end(err => {
           if(err) {

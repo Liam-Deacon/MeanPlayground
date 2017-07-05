@@ -1,5 +1,5 @@
 {
-  "name": "mean-playground",
+  "name": "re-mind",
   "version": "0.0.0",
   "main": "server/index.js",
   "dependencies": {

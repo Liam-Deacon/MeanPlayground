@@ -10,8 +10,11 @@ import settings from './settings';
 import signup from './signup';
 import oauthButtons from '../../components/oauth-buttons';
 
+import groups from './groups';
+import list from './list';
+
 export default angular.module('meanPlaygroundApp.account', [uiRouter, login, settings, signup,
-  oauthButtons
+  oauthButtons, groups, list
 ])
   .config(routing)
   .run(function($rootScope) {

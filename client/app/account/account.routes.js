@@ -33,5 +33,19 @@ export default function routes($stateProvider) {
       controller: 'SettingsController',
       controllerAs: 'vm',
       authenticate: true
+    })
+    .state('groups', {
+      url: '/groups',
+      template: require('./groups/groups.html'),
+      controller: 'GroupsController',
+      controllerAs: 'vm',
+      authenticate: true
+    })
+    .state('list', {
+      url: '/list',
+      template: require('./list/list.html'),
+      controller: 'ListController',
+      controllerAs: 'vm',
+      authenticate: true
     });
 }

@@ -6,6 +6,8 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
+import Group from '../api/group/group.model';
+import List from '../api/list/list.model';
 import config from './environment/';
 
 export default function seedDatabaseIfNeeded() {
@@ -62,5 +64,28 @@ export default function seedDatabaseIfNeeded() {
         .then(() => console.log('finished populating users'))
         .catch(err => console.log('error populating users', err));
       });
+
+    Group.find({}).remove()
+      .then(() => {
+        Group.create({
+          name: 'users',
+          info: 'everyday users',
+          members: [],
+          admin: []
+        }, {
+          name: 'Awesome group',
+          info: 'The cool gang',
+          members: [],
+          admin: []
+        })
+        .then(() => console.log('finished populating groups'))
+        .catch(err => console.log('error populating groups', err));
+      });
+
+    List.create({
+      name: 'List1',
+      comment: 'My first list...',
+      items: ['blah', 'bl', 'la']
+    });
   }
 }
