@@ -1,16 +1,14 @@
 'use strict';
 
 var emptyGroup = {
-  	name: '',
-  	info: '',
-  	admin: [],
-  	members: []
+    name: '',
+    info: '',
+    admin: [],
+    members: []
   };
 
 // @flow
 export default class GroupsController {
-  $http;
-  socket;
   groups = [];
   newGroup = emptyGroup;
   
@@ -18,6 +16,7 @@ export default class GroupsController {
   constructor($http, $scope, socket) {
     this.$http = $http;
     this.socket = socket;
+    this.groups = this.$http.get('/api/groups');
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('group');
@@ -29,6 +28,7 @@ export default class GroupsController {
       .then(response => {
         this.groups = response.data;
         this.socket.syncUpdates('group', this.groups);
+        console.log(groups);
       });
   }
 

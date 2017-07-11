@@ -47,5 +47,12 @@ export default function routes($stateProvider) {
       controller: 'ListController',
       controllerAs: 'vm',
       authenticate: true
+    })    
+    .state('locations', {
+      url: '/locations',
+      template: require('./locations/locations.html'),
+      controller: 'LocationController',
+      controllerAs: 'vm',
+      authenticate: true
     });
 }
