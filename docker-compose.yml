@@ -1,0 +1,19 @@
+mongo:
+  restart: always
+  image: mongo:3.2.3
+application:
+  restart: always
+  build: .
+  environment:
+   - NODE_ENV=production
+   - MONGODB_URI=mongodb://mongo:27017/mean_playground
+   - USE_OFFSET
+   - LAT_OFFSET
+   - LNG_OFFSET
+  ports:
+   - "8080:8080"
+   - "5858:5858"
+  volumes :
+  - ./:/app
+  links:
+   - mongo

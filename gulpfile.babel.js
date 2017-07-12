@@ -474,6 +474,14 @@ gulp.task('build', cb => {
         cb);
 });
 
+gulp.task('build:docker', cb => {
+    runSequence(
+        'build',
+        'dockerBuild',
+        'dockerSave',
+        cb);
+});
+
 gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**`], {dot: true}));
 
 gulp.task('build:images', () => {
@@ -547,6 +555,21 @@ gulp.task('copy:server', () => {
         'package.json'
     ], {cwdbase: true})
         .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('dockerBuild', function(cb) {
+  runCommand('docker-compose', ["build"], cb);
+});
+
+gulp.task('dockerRun', function (cb) {
+  runCommand('docker-compose', ['up'], cb);
+});
+
+gulp.task('dockerSave', function (cb) {
+  // generate the name docker compose will use for the image
+  let name = path.basename(__dirname);
+  name = name.replace(/-/g, '')
+  runCommand('docker', ['save', `-o`, `${name}.tar`, `${name}_application`], cb);
 });
 
 /********************
