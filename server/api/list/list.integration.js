@@ -36,7 +36,7 @@ describe('list API:', function() {
         .post('/api/lists')
         .send({
           name: 'New list',
-          info: 'This is the brand new list!!!'
+          comment: 'This is the brand new list!!!'
         })
         .expect(201)
         .expect('Content-Type', /json/)
@@ -51,7 +51,7 @@ describe('list API:', function() {
 
     it('should respond with the newly created list', function() {
       expect(newlist.name).to.equal('New list');
-      expect(newlist.info).to.equal('This is the brand new list!!!');
+      expect(newlist.comment).to.equal('This is the brand new list!!!');
     });
   });
 
@@ -78,7 +78,7 @@ describe('list API:', function() {
 
     it('should respond with the requested list', function() {
       expect(list.name).to.equal('New list');
-      expect(list.info).to.equal('This is the brand new list!!!');
+      expect(list.comment).to.equal('This is the brand new list!!!');
     });
   });
 
@@ -90,7 +90,7 @@ describe('list API:', function() {
         .put(`/api/lists/${newlist._id}`)
         .send({
           name: 'Updated list',
-          info: 'This is the updated list!!!'
+          comment: 'This is the updated list!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -109,7 +109,7 @@ describe('list API:', function() {
 
     it('should respond with the updated list', function() {
       expect(updatedlist.name).to.equal('Updated list');
-      expect(updatedlist.info).to.equal('This is the updated list!!!');
+      expect(updatedlist.comment).to.equal('This is the updated list!!!');
     });
 
     it('should respond with the updated list on a subsequent GET', function(done) {
@@ -124,7 +124,7 @@ describe('list API:', function() {
           let list = res.body;
 
           expect(list.name).to.equal('Updated list');
-          expect(list.info).to.equal('This is the updated list!!!');
+          expect(list.comment).to.equal('This is the updated list!!!');
 
           done();
         });
@@ -139,7 +139,7 @@ describe('list API:', function() {
         .patch(`/api/lists/${newlist._id}`)
         .send([
           { op: 'replace', path: '/name', value: 'Patched list' },
-          { op: 'replace', path: '/info', value: 'This is the patched list!!!' }
+          { op: 'replace', path: '/comment', value: 'This is the patched list!!!' }
         ])
         .expect(200)
         .expect('Content-Type', /json/)
@@ -158,7 +158,7 @@ describe('list API:', function() {
 
     it('should respond with the patched list', function() {
       expect(patchedlist.name).to.equal('Patched list');
-      expect(patchedlist.info).to.equal('This is the patched list!!!');
+      expect(patchedlist.comment).to.equal('This is the patched list!!!');
     });
   });
 

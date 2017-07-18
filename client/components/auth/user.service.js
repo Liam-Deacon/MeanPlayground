@@ -20,3 +20,27 @@ export function UserResource($resource) {
     }
   });
 }
+
+export default function UserServices($scope, $user) {
+  'ngInject';
+
+  var user = $user;
+  var id = $user._id;
+
+  var groups = function() {
+    // query groups here
+    return Group.query();
+  }
+  var lists = function() {
+    // query lists here
+    return List.query();
+  }
+  var locations = function() {
+    // query locations here
+    return Location.query();
+  }
+
+  // todo
+  var currentGroup = undefined;
+  var currentList = undefined;
+}

@@ -4,7 +4,7 @@
 
 'use strict';
 
-import ThingEvents from './group.events';
+import GroupEvents from './group.events';
 
 // Model events to emit
 var events = ['save', 'remove'];
@@ -15,7 +15,7 @@ export function register(socket) {
     var event = events[i];
     var listener = createListener(`group:${event}`, socket);
 
-    ThingEvents.on(event, listener);
+    GroupEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
 }
@@ -29,6 +29,6 @@ function createListener(event, socket) {
 
 function removeListener(event, listener) {
   return function() {
-    ThingEvents.removeListener(event, listener);
+    GroupEvents.removeListener(event, listener);
   };
 }

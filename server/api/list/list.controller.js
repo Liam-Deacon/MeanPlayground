@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import list from './list.model';
+import List from './list.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,14 +66,14 @@ function handleError(res, statusCode) {
 
 // Gets a list of lists
 export function index(req, res) {
-  return list.find().exec()
+  return List.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single list from the DB
 export function show(req, res) {
-  return list.findById(req.params.id).exec()
+  return List.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -81,7 +81,7 @@ export function show(req, res) {
 
 // Creates a new list in the DB
 export function create(req, res) {
-  return list.create(req.body)
+  return List.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -91,7 +91,7 @@ export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return list.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+  return List.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -102,7 +102,7 @@ export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return list.findById(req.params.id).exec()
+  return List.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
@@ -111,7 +111,7 @@ export function patch(req, res) {
 
 // Deletes a list from the DB
 export function destroy(req, res) {
-  return list.findById(req.params.id).exec()
+  return List.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

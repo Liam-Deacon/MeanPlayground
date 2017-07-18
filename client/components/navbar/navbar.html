@@ -13,10 +13,10 @@
       <ul class="nav navbar-nav">
         <li ng-repeat="item in $ctrl.menu" ng-show="$ctrl.isLoggedIn()" ui-sref-active="active">
             <a ui-sref="{{item.state}}">
-              <i class="{{item.icon}}" aria-hidden="{{item.hidden}}">
+              <i class="{{item.icon}}" aria-hidden="{{item.hidden == 'whenNotAuthenticated' ? $ctrl.isLoggedIn() : item.hidden}}">
               </i> {{item.title}}</a>
         </li>
-        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="admin"><span class="fa fa-key"></span> Admin</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

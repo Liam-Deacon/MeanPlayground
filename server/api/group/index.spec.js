@@ -31,7 +31,7 @@ var groupIndex = proxyquire('./index.js', {
   './group.controller': groupCtrlStub
 });
 
-describe('Thing API Router:', function() {
+describe('Group API Router:', function() {
   it('should return an express router instance', function() {
     expect(groupIndex).to.equal(routerStub);
   });

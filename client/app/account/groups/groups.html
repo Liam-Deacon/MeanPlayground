@@ -3,21 +3,21 @@
     <div class="col-lg-12">
       <h1 class="page-header">Groups</h1>
       <p>Groups which you are a part of are listed below and ones where you are an administrator are shown in <strong>bold</strong>.</p>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="group in $ctrl.groups">
-        <li><a href="#" uib-tooltip="{{group.info}}">{{group.name}}<button type="button" class="close" ng-click="$ctrl.deleteGroup(list)">&times;</button></a></li>
+      <p>There are {{ctrl.groups.length}} groups</p>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="group in vm.groups">
+        <li><a href="#" uib-tooltip="{{group.info}}">{{group.name}}<button type="button" class="close" ng-click="vm.deleteGroup(group)">&times;</button></a></li>
       </ul>
+      <p>&nbsp</p>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h3>New Group</h2>
-      <p>Name: <input type="text" class="form-control" placeholder="Enter a group name..." ng-model="$ctrl.newGroup.name"></p>
-	  <p>Comment: <input type="text" class="form-control" placeholder="Enter a comment for the group..." ng-model="$ctrl.newGroup.info"></p>
 
-	  <button type="submit" class="btn btn-primary" ng-click="$ctrl.addGroup()">Add Group</button>
-    </div>
-  </div>
+	<form class="group-form" id="group-form" ng-submit="vm.addGroup()">
+	  <label><sm>New Group</sm></label>
+	  <p>Name: <input type="text" class="form-control" placeholder="Enter a group name..." ng-model="vm.newGroup.name"></p>
+	  <p>Comment: <input type="text" class="form-control" placeholder="Enter a comment for the group..." ng-model="vm.newGroup.info"></p>
+
+	  <button type="submit" class="btn btn-primary">Add Group</button>
+	</form>
+
 </div>

@@ -5,10 +5,10 @@
 'use strict';
 
 import {EventEmitter} from 'events';
-var listEvents = new EventEmitter();
+var ListEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
-listEvents.setMaxListeners(0);
+ListEvents.setMaxListeners(0);
 
 // Model events
 var events = {
@@ -26,10 +26,10 @@ function registerEvents(list) {
 
 function emitEvent(event) {
   return function(doc) {
-    listEvents.emit(`${event}:${doc._id}`, doc);
-    listEvents.emit(event, doc);
+    ListEvents.emit(`${event}:${doc._id}`, doc);
+    ListEvents.emit(event, doc);
   };
 }
 
 export {registerEvents};
-export default listEvents;
+export default ListEvents;

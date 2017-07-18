@@ -3,9 +3,10 @@
   <ul class="list-group user-list">
     <li class="list-group-item" ng-repeat="user in admin.users">
 	    <div class="user-info">
-	        <strong>{{user.name}}</strong><br>
-	        <span class="text-muted">{{user.email}}</span>
+	        <strong>{{user.name}}</strong> [{{user.role}}]<nbsp><br>
+          <span class="text-muted">{{user.email}}</span>
 	    </div>
+        <a><br><span>Administrator <input type="checkbox" ng-model="user.role" ng-checked="user.role == 'admin'"></span></a>&nbsp&nbsp
         <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
     </li>
   </ul>

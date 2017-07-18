@@ -13,8 +13,15 @@ export class NavbarComponent {
     title: 'Groups',
     state: 'groups',
     icon: 'fa fa-users',
-    hidden: false
-  }];
+    hidden: 'whenNotAuthenticated'
+  }, {
+    title: 'Locations',
+    state: 'locations',
+    icon: 'fa fa-map',
+    hidden: 'whenNotAuthenticated'
+  }
+
+  ];
   isLoggedIn: Function;
   isAdmin: Function;
   getCurrentUser: Function;
